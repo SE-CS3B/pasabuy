@@ -13,12 +13,14 @@
             <p class="mb-5 space-y-1 font-light text-gray-500">
               Log in with your email and password
             </p>
+            <form action="#" @submit.prevent="loginUser">
             <div class="">
               <input
                 aria-label="Email"
-                name=""
+                name="email"
+                v-model="dataForm.email"
                 type="email"
-                required
+                
                 class="relative block w-full h-12 px-3 py-2 mt-8 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm"
                 placeholder="Email"
                 value=""
@@ -27,9 +29,10 @@
             <div class="text-2xl">
               <input
                 aria-label="Password"
-                name=""
+                name="password"
+                v-model="dataForm.password"
                 type="password"
-                required
+                
                 class="relative block w-full h-12 px-3 py-2 text-sm placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 focus:text-l"
                 placeholder="Password"
                 value=""
@@ -47,9 +50,10 @@
               <button
                 class="w-full h-12 px-5 py-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700"
               >
-                <router-link :to="{ name: 'dashboard' }">Log in</router-link>
+              Log in
               </button>
             </div>
+            </form>
             <div
               class="mt-4 font-normal text-left text-gray-500 text-md text-grey-dark"
             >
@@ -78,26 +82,31 @@
             <p class="mb-5 space-y-1 font-light text-gray-500">
               Log in with your email and password
             </p>
+            <form action="#" @submit.prevent="loginUser">
             <div class="">
               <input
                 aria-label="Email"
-                name=""
+                name="email"
+                v-model="dataForm.email"
                 type="email"
-                required
+                
                 class="relative block w-full h-12 px-3 py-2 mt-8 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm"
                 placeholder="Email"
                 value=""
+                
               />
             </div>
             <div class="text-2xl">
               <input
                 aria-label="Password"
-                name=""
+                name="password"
+                v-model="dataForm.password"
                 type="password"
-                required
+                
                 class="relative block w-full h-12 px-3 py-2 text-sm placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 focus:text-l"
                 placeholder="Password"
                 value=""
+                
               />
             </div>
             <div class="mt-6 text-left text-md text-grey-dark">
@@ -110,11 +119,12 @@
             </div>
             <div class="flex justify-center py-5">
               <button
-                @click.prevent="loginUser" type="submit" class="w-full h-12 px-5 py-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700"
+                type="submit" class="w-full h-12 px-5 py-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700"
               >
                 Log in
               </button>
             </div>
+            </form>
             <div
               class="mt-4 font-normal text-left text-gray-500 text-md text-grey-dark"
             >
@@ -188,7 +198,7 @@ img {
 export default {
   data(){
     return{
-      form:{
+      dataForm:{
         email: '',
         password: ''
       },
@@ -197,11 +207,19 @@ export default {
   },
   methods:{
     loginUser(){
-      axios.post('/api/login', this.form).then(()=>{
-        this.$router.push({name:"dashboard"});
-      }).catch((error)=>{
-        this.error = error.response.data.errors;
-      })
+      axios.get('/sanctum/csrf-cookie').then(response => {
+          // Login...
+           axios.post('/login', this.dataForm).then(response=>{
+            // this.$router.push({name:"dashboard"});
+            console.log(response);
+           });
+      });
+
+      // axios.post('/api/login', this.form).then(()=>{
+      //   this.$router.push({name:"dashboard"});
+      // }).catch((error)=>{
+      //   this.error = error.response.data.errors;
+      // })
     }
   }
 }

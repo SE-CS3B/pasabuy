@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'tbl_userauthentication',
     ],
 
     /*
@@ -94,7 +94,7 @@ return [
 
     'passwords' => [
         'tbl_userauthentication' => [
-            'provider' => 'users',
+            'provider' => 'tbl_userauthentication',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
