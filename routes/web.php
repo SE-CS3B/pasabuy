@@ -18,7 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/login', 'auth/login')->name('login');
+Route::get ('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');
+
+
 Route::view('/test', 'test');
 
 
