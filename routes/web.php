@@ -18,10 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get ('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');
+
+Route::post('login',[App\Http\Controllers\LoginController::class, 'login'] );
+
+// Route::get ('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');
 
 
-Route::view('/test', 'test');
+
+// Route::view('/test', 'test');
 
 
 // Auth::routes();

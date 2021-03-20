@@ -110,9 +110,9 @@
             </div>
             <div class="flex justify-center py-5">
               <button
-                class="w-full h-12 px-5 py-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700"
+                @click.prevent="loginUser" type="submit" class="w-full h-12 px-5 py-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700"
               >
-                <router-link :to="{ name: 'dashboard' }">Log in</router-link>
+                Log in
               </button>
             </div>
             <div
@@ -182,4 +182,28 @@ img {
   width: 11%;
 }
 </style>
+
+
+<script>
+export default {
+  data(){
+    return{
+      form:{
+        email: '',
+        password: ''
+      },
+      errors:[]
+    }
+  },
+  methods:{
+    loginUser(){
+      axios.post('/api/login', this.form).then(()=>{
+        this.$router.push({name:"dashboard"});
+      }).catch((error)=>{
+        this.error = error.response.data.errors;
+      })
+    }
+  }
+}
+</script>
 
