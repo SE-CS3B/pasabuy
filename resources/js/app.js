@@ -7,6 +7,7 @@
 //     }
 // }).mount('#home')
 require('./bootstrap')
+axios.defaults.withCredentials = true;
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

@@ -7,6 +7,7 @@
     
     <!--START OF 'POST OFFER OR REQUEST' CODE-->
       <div class="flex flex-wrap overflow-hidden mmd:pt-12  ">
+     
         <div class="overflow-hidden mmd:w-3/5">
           <div class="flex flex-wrap mmd:w-3/4 mmd:px-0 mmd:float-right rounded-lg sm:w-full mt-10 ">
             <div class="flex items-center w-full px-8 bg-white rounded-lg">
@@ -1513,6 +1514,18 @@ import Navbar from './Navbar.vue'
  export default {
   components:{
      Navbar
+  },
+  data(){
+    return{
+      user: null
+    }
+  },
+  mounted(){
+    axios.get('/api/user').then((res)=>{
+      this.user = res.data;
+    }).catch((error) => {
+      this.error=error.response.data.errors;
+    })
   }
 
 }
