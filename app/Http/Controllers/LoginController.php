@@ -19,7 +19,7 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
 
-        if(Auth::guard('user')->atttempt(array( 'email' => $request->email,'password' => $request->password))) {
+        if(Auth::atttempt(array( 'email' => $request->email,'password' => $request->password))) {
             //return response()->json(Auth::user(),200);
            dd('ok'); 
         }
