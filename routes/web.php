@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 
-Route::post('login',[App\Http\Controllers\LoginController::class, 'login'] );
+// Route::post('login',[App\Http\Controllers\LoginController::class, 'login'] );
 
 // Route::get ('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');
 

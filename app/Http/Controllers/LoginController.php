@@ -13,15 +13,15 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         # code...
-
         
         $request->validate([
             'email'=>['required','email'],
             'password' => ['required']
         ]);
 
-        if(Auth::atttempt($request->only('email','password'))){
-            return response()->json(Auth::user(),200);
+        if(Auth::guard('user')->atttempt(array( 'email' => $request->email,'password' => $request->password))) {
+            //return response()->json(Auth::user(),200);
+           dd('ok'); 
         }
         throw ValidationException::withMessages([
             'email'=>['The provided credentials are incorrect.']

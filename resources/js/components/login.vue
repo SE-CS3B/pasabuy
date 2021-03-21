@@ -13,17 +13,15 @@
             <p class="mb-5 space-y-1 font-light text-gray-500">
               Log in with your email and password
             </p>
-            <form action="#" @submit.prevent="loginUser">
+            <form action="#" @submit="loginUser">
             <div class="">
               <input
                 aria-label="Email"
                 name="email"
                 v-model="dataForm.email"
                 type="email"
-                
                 class="relative block w-full h-12 px-3 py-2 mt-8 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm"
                 placeholder="Email"
-                value=""
               />
             </div>
             <div class="text-2xl">
@@ -32,10 +30,8 @@
                 name="password"
                 v-model="dataForm.password"
                 type="password"
-                
                 class="relative block w-full h-12 px-3 py-2 text-sm placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 focus:text-l"
                 placeholder="Password"
-                value=""
               />
             </div>
             <div class="mt-6 text-left text-md text-grey-dark">
@@ -89,11 +85,8 @@
                 name="email"
                 v-model="dataForm.email"
                 type="email"
-                
                 class="relative block w-full h-12 px-3 py-2 mt-8 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm"
                 placeholder="Email"
-                value=""
-                
               />
             </div>
             <div class="text-2xl">
@@ -102,11 +95,8 @@
                 name="password"
                 v-model="dataForm.password"
                 type="password"
-                
                 class="relative block w-full h-12 px-3 py-2 text-sm placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 focus:text-l"
                 placeholder="Password"
-                value=""
-                
               />
             </div>
             <div class="mt-6 text-left text-md text-grey-dark">
@@ -199,8 +189,8 @@ export default {
   data(){
     return{
       dataForm:{
-        email: '',
-        password: ''
+        email: null,
+        password: null
       },
       errors:[]
     }
@@ -209,10 +199,16 @@ export default {
     loginUser(){
       axios.get('/sanctum/csrf-cookie').then(response => {
           // Login...
-           axios.post('/login', this.dataForm).then(response=>{
-            // this.$router.push({name:"dashboard"});
-            console.log(response);
-           });
+           axios.post('/api/login', this.dataForm).then(()=>{
+              this.$router.push({name:"dashboard"});
+            }).catch((error)=>{
+              this.error = error.response.data.errors;
+            })
+          // console.log(this.dataForm);
+          //  axios.post('/api/login', this.dataForm).then(response=>{
+          //   // this.$router.push({name:"dashboard"});
+          //   console.log(response);
+          //  });
       });
 
       // axios.post('/api/login', this.form).then(()=>{
