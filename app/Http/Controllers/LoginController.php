@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 
@@ -18,10 +19,10 @@ class LoginController extends Controller
             'email'=>['required','email'],
             'password' => ['required']
         ]);
-
-        if(Auth::atttempt(array( 'email' => $request->email,'password' => $request->password))) {
-            //return response()->json(Auth::user(),200);
-           dd('ok'); 
+       
+        if(Auth::attempt($request->only('email','password'))) {
+            return response()->json(Auth::user(),200);
+            
         }
         throw ValidationException::withMessages([
             'email'=>['The provided credentials are incorrect.']

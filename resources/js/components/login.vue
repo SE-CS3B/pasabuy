@@ -13,7 +13,7 @@
             <p class="mb-5 space-y-1 font-light text-gray-500">
               Log in with your email and password
             </p>
-            <form action="#" @submit="loginUser">
+            <form action="#" @submit.prevent="loginUser">
             <div class="">
               <input
                 aria-label="Email"
@@ -189,8 +189,8 @@ export default {
   data(){
     return{
       dataForm:{
-        email: null,
-        password: null
+        email: '',
+        password: ''
       },
       errors:[]
     }
@@ -204,18 +204,8 @@ export default {
             }).catch((error)=>{
               this.error = error.response.data.errors;
             })
-          // console.log(this.dataForm);
-          //  axios.post('/api/login', this.dataForm).then(response=>{
-          //   // this.$router.push({name:"dashboard"});
-          //   console.log(response);
-          //  });
+        
       });
-
-      // axios.post('/api/login', this.form).then(()=>{
-      //   this.$router.push({name:"dashboard"});
-      // }).catch((error)=>{
-      //   this.error = error.response.data.errors;
-      // })
     }
   }
 }
