@@ -11,6 +11,7 @@ import accountsettings from '../components/accountset.vue'
 import deliver from '../components/deliver.vue'
 import orders from '../components/orders.vue'
 import messages from '../components/messaging.vue'
+import axios from 'axios'
 
 
 const routes = [
@@ -59,7 +60,14 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: dashboard
+    component: dashboard,
+    beforeEnter: (to, form, next ) =>{
+      axios.get('/api/authenticated').then(()=>{
+        next()
+      }).catch(()=>{
+        return next({ name: 'login'})
+      })
+    }
   },
 
   {

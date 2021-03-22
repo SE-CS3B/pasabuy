@@ -14,7 +14,9 @@
               Log in with your email and password
             </p>
             <form action="#" @submit.prevent="loginUser">
+              
             <div class="">
+              <p class="w-full text-red-500 " v-text="errors.email" ></p>
               <input
                 aria-label="Email"
                 name="email"
@@ -24,7 +26,8 @@
                 placeholder="Email"
               />
             </div>
-            <div class="text-2xl">
+            <div class="">
+              <p class="w-full text-red-500 " v-text="errors.password" ></p>
               <input
                 aria-label="Password"
                 name="password"
@@ -80,6 +83,7 @@
             </p>
             <form action="#" @submit.prevent="loginUser">
             <div class="">
+              <p class="w-full text-red-500 " v-text="errors.email" ></p>
               <input
                 aria-label="Email"
                 name="email"
@@ -89,7 +93,8 @@
                 placeholder="Email"
               />
             </div>
-            <div class="text-2xl">
+            <div class="">
+              <p class="w-full text-red-500 " v-text="errors.password" ></p>
               <input
                 aria-label="Password"
                 name="password"
@@ -190,7 +195,8 @@ export default {
     return{
       dataForm:{
         email: '',
-        password: ''
+        password: '',
+        device_name: 'browser'
       },
       errors:[]
     }
@@ -199,10 +205,12 @@ export default {
     loginUser(){
       axios.get('/sanctum/csrf-cookie').then(response => {
           // Login...
-           axios.post('/api/login', this.dataForm).then(()=>{
+           axios.post('/api/login', this.dataForm).then(response=>{
+              //localStorage.setItem('token',response.data)
+              // console.log(response.data);
               this.$router.push({name:"dashboard"});
-            }).catch((error)=>{
-              this.error = error.response.data.errors;
+            }).catch((errors)=>{
+              this.errors = errors.response.data.errors;
             })
         
       });
