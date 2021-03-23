@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
+
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,8 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-// Route::post('login',[App\Http\Controllers\LoginController::class, 'login'] );
 
 // Route::get ('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');
 

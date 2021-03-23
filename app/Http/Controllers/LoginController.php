@@ -17,8 +17,7 @@ class LoginController extends Controller
         # code..
         $request->validate([
             'email'=>['required','email'],
-            'password' => ['required'],
-            'device_name' => ['required']
+            'password' => ['required']
         ]);
        
         $user = Auth::attempt($request->only('email','password'));
@@ -28,5 +27,15 @@ class LoginController extends Controller
         throw ValidationException::withMessages([
             'email'=>['The provided credentials are incorrect.']
         ]);
+    }
+
+
+    public function logout(Request $request)
+    {
+        # code...
+        Auth::logout();
+    
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     }
 }

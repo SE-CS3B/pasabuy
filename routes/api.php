@@ -23,9 +23,8 @@ Route::middleware('auth:sanctum')->get('/authenticated', function () {
     return true;
 });
 
-
-// Route::post('/sanctum/token', [LoginController::class, 'login']);
 Route::post('login',[LoginController::class, 'login'] )->name('login');
+Route::post('logout',[LoginController::class, 'logout'] );
 
 
 // Route::post('/tokens/create', function (Request $request) {
