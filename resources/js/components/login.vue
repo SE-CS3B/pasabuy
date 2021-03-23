@@ -206,6 +206,7 @@ export default {
           // Login...
            axios.post('api/login', this.dataForm).then(response=>{
               console.log(response.data);
+              localStorage.setItem('isLoggedIn', 'true');
               this.$router.push({name:"dashboard"});
             }).catch((errors)=>{
               this.errors = errors.response.data.errors;

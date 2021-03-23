@@ -127,6 +127,7 @@ export default {
         console.log('logout');
           // Login...
         axios.post('api/logout').then(()=>{
+          localStorage.removeItem('isLoggedIn');
           this.$router.push({name:"Home"});
         })
     }
