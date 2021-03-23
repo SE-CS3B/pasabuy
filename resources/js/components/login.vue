@@ -195,8 +195,7 @@ export default {
     return{
       dataForm:{
         email: '',
-        password: '',
-        device_name: 'browser'
+        password: ''
       },
       errors:[]
     }
@@ -205,9 +204,8 @@ export default {
     loginUser(){
       axios.get('/sanctum/csrf-cookie').then(response => {
           // Login...
-           axios.post('/api/login', this.dataForm).then(response=>{
-              //localStorage.setItem('token',response.data)
-              // console.log(response.data);
+           axios.post('api/login', this.dataForm).then(response=>{
+              console.log(response.data);
               this.$router.push({name:"dashboard"});
             }).catch((errors)=>{
               this.errors = errors.response.data.errors;

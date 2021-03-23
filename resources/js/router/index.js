@@ -24,7 +24,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: login
+    component: login,
   },
 
   {
@@ -62,8 +62,8 @@ const routes = [
     name: 'dashboard',
     component: dashboard,
     beforeEnter: (to, form, next ) =>{
-      axios.get('/api/authenticated').then(()=>{
-        next()
+      axios.get('/api/authenticated').then(response=>{
+        next();
       }).catch(()=>{
         return next({ name: 'login'})
       })

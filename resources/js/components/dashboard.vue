@@ -1517,15 +1517,14 @@ import Navbar from './Navbar.vue'
   },
   data(){
     return{
-      user: null,
-      token:localStorage.getItem('token')
+      user: null
+     
     }
   },
   mounted(){
-    //window.axios.defaults.headers.common['Authorization'] = 'Bearer ${this.token}'
     axios.get('/api/user').then((res)=>{
-      this.user = res.data;
       console.log(res.data);
+      this.user = res.data;
     }).catch((error) => {
       this.error=error.response.data.errors;
     })
